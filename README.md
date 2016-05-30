@@ -16,5 +16,7 @@ _ 2. Initiate the SDK with a user ID (in Application class):
 ```
 
 _ 3. Use any of the classes in package io.mobitech.content.services to get data (see reference in this demo app)
+
+[See the demo video here](https://www.youtube.com/watch?v=ZqnXu4TB_Hc)
     
 
