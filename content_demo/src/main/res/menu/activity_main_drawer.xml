@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/recommendations"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="Recommendations" />
+        <item
+            android:id="@+id/interests"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="Interests" />
+        <item
+            android:id="@+id/entities"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="Entities" />
+    </group>
+
+</menu>
