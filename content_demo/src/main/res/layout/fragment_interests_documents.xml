@@ -10,35 +10,42 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="60dp"
             android:gravity="center_horizontal"
-            android:text="Entities"
+            android:text="Set user's documents/content (interests)"
             android:textSize="20dp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/interests_get_user_categories"
+            android:id="@+id/interests_get_user_documents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Get User's categories"
+            android:layout_margin="2dp"
+            android:text="Get User's documents"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/interests_add_user_category"
+            android:id="@+id/interests_add_user_documents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Add user category"
+            android:layout_margin="2dp"
+            android:text="Add a document to user"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/interests_delete_user_category"
+            android:id="@+id/interests_delete_user_documents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Delete user category"
+            android:layout_margin="2dp"
+            android:text="Delete user's documents"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/show_a_document"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Display a document"
             android:textAllCaps="false" />
 
 

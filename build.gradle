@@ -7,6 +7,10 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.0'
 
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4' //required for bintray
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3' //required for bintray
+
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8' //required for LoganSquare
     }
 }
 
@@ -14,4 +18,29 @@ allprojects {
     repositories {
         jcenter()
     }
+    apply plugin: 'maven'
+    group = 'io.mobitech'
+    version = '1.1.06'
+}
+
+def getContentSDKlibraryNextVersion(){
+    return version
+}
+
+ext {
+    currentVersion = version
+    nextVersion = '1.1.07'
+    bintrayRepo = 'maven'
+    bintrayName = 'mobitech-io'
+
+    publishedGroupId = group
+    siteUrl = 'http://mobitech.io'
+
+    developerId = 'gal'
+    developerName = 'Gal Levinsky'
+    developerEmail = 'gal@mobitech.io'
+
+    licenseName = 'Attribution-NonCommercial-NoDerivatives 4.0 International'
+    licenseUrl = 'http://creativecommons.org/licenses/by-nc-nd/4.0/'
+    allLicenses = ["Attribution-NonCommercial-NoDerivatives 4.0 International"]
 }

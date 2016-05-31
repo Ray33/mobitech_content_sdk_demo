@@ -1,7 +1,6 @@
 package io.mobitech.contentdemo;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +13,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import io.mobitech.contentdemo.fragments.DocumentContainerFragment;
 import io.mobitech.contentdemo.fragments.EntitiesContainerFragment;
-import io.mobitech.contentdemo.fragments.InterestsContainerFragment;
+import io.mobitech.contentdemo.fragments.InterestsCategoriesContainerFragment;
+import io.mobitech.contentdemo.fragments.InterestsDocumentsContainerFragment;
+import io.mobitech.contentdemo.fragments.MainScreenContainerFragment;
 import io.mobitech.contentdemo.fragments.RecommendationsContainerFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        onNavigationItemSelected(null);
     }
 
     @Override
@@ -75,16 +79,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Fragment fragment = null;
 
+       int id = item!=null ?  item.getItemId() :  Integer.MAX_VALUE;;
+
+        Fragment fragment = null;
 
         if (id == R.id.recommendations) {
             fragment = new RecommendationsContainerFragment();
-        } else if (id == R.id.interests) {
-            fragment = new InterestsContainerFragment();
+        } else if (id == R.id.interests_categories) {
+            fragment = new InterestsCategoriesContainerFragment();
+        } else if (id == R.id.interests_document) {
+            fragment = new InterestsDocumentsContainerFragment();
         } else if (id == R.id.entities) {
             fragment = new EntitiesContainerFragment();
+        } else if (id == R.id.get_a_document){
+            fragment = new DocumentContainerFragment();
+        }else{
+            fragment = new MainScreenContainerFragment();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

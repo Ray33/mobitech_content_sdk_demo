@@ -24,12 +24,12 @@ import io.mobitech.content.services.InterestsServices;
 import io.mobitech.contentdemo.R;
 
 
-public class InterestsContainerFragment extends Fragment {
+public class InterestsCategoriesContainerFragment extends Fragment {
 
     TextView mInterestsResult;
     List<Category> mUserCategories = new ArrayList<>();
 
-    public InterestsContainerFragment() {
+    public InterestsCategoriesContainerFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +42,11 @@ public class InterestsContainerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_interests, container, false);
+        View view = inflater.inflate(R.layout.fragment_interests_categories, container, false);
 
-        mInterestsResult = (TextView)view.findViewById(R.id.interests_result);
+        mInterestsResult = (TextView) view.findViewById(R.id.interests_result);
 
-        Button getUserCategoriesBtn = (Button)view.findViewById(R.id.interests_get_user_categories);
+        Button getUserCategoriesBtn = (Button) view.findViewById(R.id.interests_get_user_categories);
         getUserCategoriesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +54,7 @@ public class InterestsContainerFragment extends Fragment {
             }
         });
 
-        Button deleteUserCategoryBtn = (Button)view.findViewById(R.id.interests_delete_user_category);
+        Button deleteUserCategoryBtn = (Button) view.findViewById(R.id.interests_delete_user_category);
         deleteUserCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class InterestsContainerFragment extends Fragment {
             }
         });
 
-        Button addUserCategoryBtn = (Button)view.findViewById(R.id.interests_add_user_category);
+        Button addUserCategoryBtn = (Button) view.findViewById(R.id.interests_add_user_category);
         addUserCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,8 +81,8 @@ public class InterestsContainerFragment extends Fragment {
                 InterestsCategoryResponse categories_ = categories.get(0);
                 mUserCategories.clear();
                 String txt = "Got <b>" + categories_.getItems().size() + "</b> categories <br/><br/>";
-                for (CategoryInterest c : categories_.getItems()){
-                    txt += c.getCategory().getName()+ "<br/>";
+                for (CategoryInterest c : categories_.getItems()) {
+                    txt += c.getCategory().getName() + "<br/>";
                     mUserCategories.add(c.getCategory());
                 }
                 mInterestsResult.setText(Html.fromHtml(txt));
@@ -93,7 +93,7 @@ public class InterestsContainerFragment extends Fragment {
 
     private void deleteUserCategory() {
         //verify user categories are initiated
-        if (mUserCategories.isEmpty()){
+        if (mUserCategories.isEmpty()) {
             mInterestsResult.setText(Html.fromHtml("User category list is empty!<br/> Get all user categories or add new category"));
             return;
         }
@@ -104,11 +104,11 @@ public class InterestsContainerFragment extends Fragment {
         InterestsServices.updateInterestsCategoryById(getContext(), new IUpdateCallback() {
             @Override
             public void postUpdate(String msg) {
-                String status = msg.equals("204") ? "success" : "failure";
-                if (msg.equals("204")){
+                String status = msg.equals("204") ? "successful" : "failure";
+                if (msg.equals("204")) {
                     mUserCategories.remove(categoryToDelete);
                 }
-                String txt = "Category <b>" + categoryToDelete.getName() + "</b> delete was a " + status;
+                String txt = "Category <b>" + categoryToDelete.getName() + "</b> delete was <b>" + status + "</b>";
                 mInterestsResult.setText(Html.fromHtml(txt));
             }
         }, categoryToDelete.getId(), isUserInterestedInTheCategory);
@@ -121,9 +121,9 @@ public class InterestsContainerFragment extends Fragment {
             @Override
             public void execute(List<Categories> categoriesList) {
                 //in this callback, choose one category and add it to user's category
-                if (!categoriesList.isEmpty() && !categoriesList.get(0).getCategories().isEmpty()){
+                if (!categoriesList.isEmpty() && !categoriesList.get(0).getCategories().isEmpty()) {
                     //choose a random category out of available categories
-                    final Category categoryToUpdate = categoriesList.get(0).getCategories().get((int)(Math.random()*(double)categoriesList.get(0).getCategories().size()) -1);
+                    final Category categoryToUpdate = categoriesList.get(0).getCategories().get((int) (Math.random() * (double) categoriesList.get(0).getCategories().size()) - 1);
 
                     IUpdateCallback updateSiteCallback = new IUpdateCallback() {
                         @Override
@@ -135,16 +135,15 @@ public class InterestsContainerFragment extends Fragment {
                         }
                     };
                     //update user site interest with a certain site
-                    String categoryIdToAdd =  categoryToUpdate.getId();
-                    InterestsServices.updateInterestsCategoryById(getContext(), updateSiteCallback ,categoryIdToAdd , true);
+                    String categoryIdToAdd = categoryToUpdate.getId();
+                    InterestsServices.updateInterestsCategoryById(getContext(), updateSiteCallback, categoryIdToAdd, true);
                 }
             }
         };
 
         //get list of possible sites
-        EntitiesServices.getCategories(getContext(),categoryCallback ,0,0);
+        EntitiesServices.getCategories(getContext(), categoryCallback, 0, 0);
     }
-
 
 
 }

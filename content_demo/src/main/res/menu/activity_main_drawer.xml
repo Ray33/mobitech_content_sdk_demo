@@ -7,13 +7,33 @@
             android:icon="@android:drawable/ic_media_play"
             android:title="Recommendations" />
         <item
-            android:id="@+id/interests"
-            android:icon="@android:drawable/ic_media_play"
-            android:title="Interests" />
-        <item
             android:id="@+id/entities"
             android:icon="@android:drawable/ic_media_play"
-            android:title="Entities" />
-    </group>
+            android:title="Platform Entities" />
+
+        <item
+            android:id="@+id/get_a_document"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="Show Document" />
+
+        <item
+            android:icon="@android:drawable/ic_media_play"
+            android:title="User interests">
+            <menu>
+                <item
+                    android:id="@+id/interests_categories"
+                    android:icon="@android:drawable/ic_media_play"
+                    android:title="User categories" />
+                <item
+                    android:id="@+id/interests_document"
+                    android:icon="@android:drawable/ic_media_play"
+                    android:title="User documents" />
+
+            </menu>
+        </item>
+
+</group>
+
+
 
 </menu>

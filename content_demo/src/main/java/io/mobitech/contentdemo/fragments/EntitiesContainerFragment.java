@@ -12,8 +12,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.mobitech.content.model.sphere.callbacks.ICategoryCallback;
+import io.mobitech.content.model.sphere.callbacks.ISitesCallback;
 import io.mobitech.content.model.sphere.categories.Categories;
 import io.mobitech.content.model.sphere.categories.Category;
+import io.mobitech.content.model.sphere.sites.Site;
+import io.mobitech.content.model.sphere.sites.SitesResponse;
 import io.mobitech.content.services.EntitiesServices;
 import io.mobitech.contentdemo.R;
 
@@ -40,6 +43,7 @@ public class EntitiesContainerFragment extends Fragment {
 
         mEntitiesResult = (TextView)view.findViewById(R.id.entities_result);
 
+        //Get list of all categories that the platform supports.
         Button getCategoryBtn = (Button)view.findViewById(R.id.entities_get_categories);
         getCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,15 +52,25 @@ public class EntitiesContainerFragment extends Fragment {
             }
         });
 
+        Button getSitesBtn = (Button) view.findViewById(R.id.entities_get_sites);
+        getSitesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSites();
+            }
+        });
+
         return view;
     }
 
+
+    //Get list of all categories that the platform supports.
     private void getCategories() {
         EntitiesServices.getCategories(getContext(), new ICategoryCallback() {
             @Override
             public void execute(List<Categories> categories) {
                 Categories categories_ = categories.get(0);
-                String txt = "Got <b>" + categories_.getCategories().size() + "</b> categories <br/><br/>";
+                String txt = "Got <b>" + categories_.getCategories().size() + "</b> categories in the platform <br/><br/>";
                 for (Category c : categories_.getCategories()){
                     txt += c.getName()+ "<br/>";
                 }
@@ -64,6 +78,20 @@ public class EntitiesContainerFragment extends Fragment {
             }
         }, 0, 0);
 
+    }
+
+    private void getSites() {
+        EntitiesServices.getSites(getContext(), new ISitesCallback() {
+            @Override
+            public void execute(List<SitesResponse> sites) {
+                SitesResponse siteResponse = sites.get(0);
+                String txt = "Got <b>" + siteResponse.getItems().size() + "</b> sites in the platform<br/><br/>";
+                for (Site site : siteResponse.getItems()) {
+                    txt += site.getName() + "<br/>";
+                }
+                mEntitiesResult.setText(Html.fromHtml(txt));
+            }
+        }, 0, 0);
     }
 
 }
