@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2016. http://mobitech.io. All rights reserved.
+ * Code is not permitted for commercial use w/o permission of Mobitech.io - support@mobitech.io .
+ * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+
 package io.mobitech.contentdemo;
 
 import android.os.Bundle;
@@ -13,7 +21,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import io.mobitech.contentdemo.fragments.DocumentContainerFragment;
 import io.mobitech.contentdemo.fragments.EntitiesContainerFragment;
 import io.mobitech.contentdemo.fragments.InterestsCategoriesContainerFragment;
 import io.mobitech.contentdemo.fragments.InterestsDocumentsContainerFragment;
@@ -80,7 +87,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
-       int id = item!=null ?  item.getItemId() :  Integer.MAX_VALUE;;
+       int id = item!=null ?  item.getItemId() :  Integer.MAX_VALUE;
 
         Fragment fragment = null;
 
@@ -92,9 +99,7 @@ public class MainActivity extends AppCompatActivity
             fragment = new InterestsDocumentsContainerFragment();
         } else if (id == R.id.entities) {
             fragment = new EntitiesContainerFragment();
-        } else if (id == R.id.get_a_document){
-            fragment = new DocumentContainerFragment();
-        }else{
+        } else{
             fragment = new MainScreenContainerFragment();
         }
 
