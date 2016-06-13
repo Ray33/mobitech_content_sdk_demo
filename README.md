@@ -1,7 +1,7 @@
 # mobitech_content_sdk_demo
 Demo of Mobitech content SDK usage.
-(Download apk here)
-[![Download apk here](https://www.dropbox.com/s/fmki0a0dyweyvld/content_demo.apk?dl=1)]
+
+[Download apk here](https://www.dropbox.com/s/fmki0a0dyweyvld/content_demo.apk?dl=1)
 To use Mobitech content SDK, follow these steps:
 
 _ 1. Define dependency to Mobitech's content SDK in your app gradle.build file:
