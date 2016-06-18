@@ -20,9 +20,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.mobitech.content.model.sphere.callbacks.AbsSphereUpdateCallback;
 import io.mobitech.content.model.sphere.callbacks.IDocumentsCallback;
 import io.mobitech.content.model.sphere.callbacks.IInterestsDocumentCallback;
-import io.mobitech.content.model.sphere.callbacks.IUpdateCallback;
 import io.mobitech.content.model.sphere.documents.Document;
 import io.mobitech.content.model.sphere.documents.Documents;
 import io.mobitech.content.model.sphere.interests.DocumentInterest;
@@ -122,14 +122,18 @@ public class InterestsDocumentsContainerFragment extends Fragment {
         //delete the first category
         final Document documentToDelete = mUserDocuments.get(0);
         boolean isUserInterestedInTheCategory = false;
-        InterestsServices.updateInterestsDocumentById(getContext(), new IUpdateCallback() {
+        InterestsServices.updateInterestsDocumentById(getContext(), new AbsSphereUpdateCallback() {
+
             @Override
-            public void postUpdate(String msg) {
-                String status = msg.equals("204") ? "successful" : "failure";
-                if (msg.equals("204")){
-                    mUserDocuments.remove(documentToDelete);
-                }
-                String txt = "Document <b>" + documentToDelete.getTitle() + "</b> delete was <b>" + status + "</b>";
+            public void postUpdateSuccess(String msg) {
+                mUserDocuments.remove(documentToDelete);
+                String txt = "Document <b>" + documentToDelete.getTitle() + "</b> delete was <b> successful </b>";
+                mInterestsResult.setText(Html.fromHtml(txt));
+            }
+
+            @Override
+            public void postUpdateFailure(String msg) {
+                String txt = "Document <b>" + documentToDelete.getTitle() + "</b> delete was <b> failure </b>";
                 mInterestsResult.setText(Html.fromHtml(txt));
             }
         }, documentToDelete.getId(), isUserInterestedInTheCategory);
@@ -147,12 +151,17 @@ public class InterestsDocumentsContainerFragment extends Fragment {
                     int randomDocumentPosition = (int) (Math.random() * (double) documents.get(0).getItems().size()) - 1;
                     final Document documentToUpdate = documents.get(0).getItems().get(randomDocumentPosition).getDocument();
 
-                    IUpdateCallback updateDocumentCallback = new IUpdateCallback() {
-                        @Override
-                        public void postUpdate(String msg) {
-                            String status = msg.equals("201") ? "successful" : "failure";
+                    AbsSphereUpdateCallback updateDocumentCallback = new AbsSphereUpdateCallback() {
 
-                            String txt = "Document <b>" + documentToUpdate.getTitle() + "</b> add status is: <br/><b>" + status + "</b>";
+                        @Override
+                        public void postUpdateSuccess(String msg) {
+                            String txt = "Document <b>" + documentToUpdate.getTitle() + "</b> add status is: <br/><b>successful</b>";
+                            mInterestsResult.setText(Html.fromHtml(txt));
+                        }
+
+                        @Override
+                        public void postUpdateFailure(String msg) {
+                            String txt = "Document <b>" + documentToUpdate.getTitle() + "</b> add status is: <br/><b>failure</b>";
                             mInterestsResult.setText(Html.fromHtml(txt));
                         }
                     };

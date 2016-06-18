@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.mobitech.content.model.sphere.callbacks.AbsSphereUpdateCallback;
 import io.mobitech.content.model.sphere.callbacks.ICategoryCallback;
 import io.mobitech.content.model.sphere.callbacks.IInterestsCategoryCallback;
 import io.mobitech.content.model.sphere.callbacks.IUpdateCallback;
@@ -109,15 +110,20 @@ public class InterestsCategoriesContainerFragment extends Fragment {
         //delete the first category
         final Category categoryToDelete = mUserCategories.get(0);
         boolean isUserInterestedInTheCategory = false;
-        InterestsServices.updateInterestsCategoryById(getContext(), new IUpdateCallback() {
+        InterestsServices.updateInterestsCategoryById(getContext(), new AbsSphereUpdateCallback() {
+
             @Override
-            public void postUpdate(String msg) {
-                String status = msg.equals("204") ? "successful" : "failure";
-                if (msg.equals("204")) {
-                    mUserCategories.remove(categoryToDelete);
-                }
-                String txt = "Category <b>" + categoryToDelete.getName() + "</b> delete was <b>" + status + "</b>";
+            public void postUpdateSuccess(String msg) {
+                mUserCategories.remove(categoryToDelete);
+                String txt = "Category <b>" + categoryToDelete.getName() + "</b> delete was <b>successful</b>";
                 mInterestsResult.setText(Html.fromHtml(txt));
+            }
+
+            @Override
+            public void postUpdateFailure(String msg) {
+                String txt = "Category <b>" + categoryToDelete.getName() + "</b> delete was <b>failure</b>";
+                mInterestsResult.setText(Html.fromHtml(txt));
+
             }
         }, categoryToDelete.getId(), isUserInterestedInTheCategory);
     }
@@ -133,12 +139,18 @@ public class InterestsCategoriesContainerFragment extends Fragment {
                     //choose a random category out of available categories
                     final Category categoryToUpdate = categoriesList.get(0).getCategories().get((int) (Math.random() * (double) categoriesList.get(0).getCategories().size()) - 1);
 
-                    IUpdateCallback updateSiteCallback = new IUpdateCallback() {
-                        @Override
-                        public void postUpdate(String msg) {
-                            String status = msg.equals("201") ? "successful" : "failure";
+                    //Optional: An update callback to handle result
+                    IUpdateCallback updateSiteCallback = new AbsSphereUpdateCallback() {
 
-                            String txt = "Category <b>" + categoryToUpdate.getName() + "</b> add was: <br/><b>" + status + "</b>";
+                        @Override
+                        public void postUpdateSuccess(String msg) {
+                            String txt = "Category <b>" + categoryToUpdate.getName() + "</b> add was: <br/><b>successful</b>";
+                            mInterestsResult.setText(Html.fromHtml(txt));
+                        }
+
+                        @Override
+                        public void postUpdateFailure(String msg) {
+                            String txt = "Category <b>" + categoryToUpdate.getName() + "</b> add was: <br/><b>failure</b>";
                             mInterestsResult.setText(Html.fromHtml(txt));
                         }
                     };

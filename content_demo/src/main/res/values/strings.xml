@@ -13,4 +13,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="MOBITECH_CONTENT_PUBLISHER_API_KEY" translatable="false">9993e182ef824e1eb56a6c57696b1c03</string>
+    <string name="MOBITECH_CONTENT_PUBLISHER_ACCESS_KEY" translatable="false">4112f550825342d78b5544a67789cc59</string>
+
 </resources>
+
+
