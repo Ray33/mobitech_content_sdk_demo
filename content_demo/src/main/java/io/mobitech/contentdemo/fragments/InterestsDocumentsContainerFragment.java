@@ -173,7 +173,7 @@ public class InterestsDocumentsContainerFragment extends Fragment {
         };
 
         //get list of possible recommended documents to user
-        RecommendationServices.getDocuments(getContext(), documentsCallback);
+        RecommendationServices.getDocuments(getContext(),null, documentsCallback);
     }
 
 

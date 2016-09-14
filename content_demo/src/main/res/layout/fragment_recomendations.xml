@@ -47,7 +47,13 @@
             android:layout_margin="2dp"
             android:text="Get Recommended Sites"
             android:textAllCaps="false"/>
-
+        <Button
+            android:id="@+id/recommendations_impression"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Mark viewed recomendations"
+            android:textAllCaps="false"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

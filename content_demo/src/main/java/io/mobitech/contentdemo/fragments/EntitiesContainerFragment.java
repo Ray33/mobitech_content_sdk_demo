@@ -84,7 +84,7 @@ public class EntitiesContainerFragment extends Fragment {
                 }
                 mEntitiesResult.setText(Html.fromHtml(txt));
             }
-        }, 0, 0);
+        }, 2000, 0);
 
     }
 
@@ -99,7 +99,7 @@ public class EntitiesContainerFragment extends Fragment {
                 }
                 mEntitiesResult.setText(Html.fromHtml(txt));
             }
-        }, 0, 0);
+        }, 2000, 0);
     }
 
 }
