@@ -66,7 +66,6 @@ public class RecommendationsContainerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        newResults = false;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recomendations, container, false);
 
@@ -110,18 +109,9 @@ public class RecommendationsContainerFragment extends Fragment {
         return view;
     }
 
-
-
-    String prevTxt = "";
-    boolean newResults = false;
-    long sec = 0;
     //Get document recommendation for user
     private void getDocuments() {
 
-
-
-        if (!newResults){
-            sec += 1000;
             RecommendationServices.getDocuments(getContext(),lastContextId, new IDocumentsCallback() {
                 @Override
                 public void execute(List<Documents> documents) {
@@ -132,13 +122,10 @@ public class RecommendationsContainerFragment extends Fragment {
                             txt += " ** " + item.getDocument().getTitle() + "<br/>";//toString()
                         }
                         mRecommendationResult.setText(Html.fromHtml(txt));
-                        newResults = prevTxt.equals(txt);
-                        prevTxt = txt;
-
                     }
                 }
             });
-        }
+
     }
 
     //Get category recommendation for user
