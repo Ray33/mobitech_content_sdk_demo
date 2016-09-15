@@ -1,4 +1,5 @@
 include ':content_demo'
-//, ':content_sdk'
+//, ':content_api_sdk'
 //
-//project(':content_sdk').projectDir = new File(settingsDir, '../sdk/content_sdk')
+//project(':content_api_sdk').projectDir = new File(settingsDir, '../coupons-mobile.contentsdk/content_api_sdk')
+
