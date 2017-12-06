@@ -21,9 +21,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import io.mobitech.contentdemo.fragments.EntitiesContainerFragment;
-import io.mobitech.contentdemo.fragments.InterestsCategoriesContainerFragment;
-import io.mobitech.contentdemo.fragments.InterestsDocumentsContainerFragment;
 import io.mobitech.contentdemo.fragments.MainScreenContainerFragment;
 import io.mobitech.contentdemo.fragments.RecommendationsContainerFragment;
 
@@ -87,19 +84,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
-       int id = item!=null ?  item.getItemId() :  Integer.MAX_VALUE;
+        int id = item != null ? item.getItemId() : Integer.MAX_VALUE;
 
         Fragment fragment = null;
 
         if (id == R.id.recommendations) {
             fragment = new RecommendationsContainerFragment();
-        } else if (id == R.id.interests_categories) {
-            fragment = new InterestsCategoriesContainerFragment();
-        } else if (id == R.id.interests_document) {
-            fragment = new InterestsDocumentsContainerFragment();
-        } else if (id == R.id.entities) {
-            fragment = new EntitiesContainerFragment();
-        } else{
+        } else {
             fragment = new MainScreenContainerFragment();
         }
 
@@ -109,8 +100,8 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         try {
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-        }catch (IllegalStateException e){
-            Log.w("MainActivity",e.getMessage(),e);
+        } catch (IllegalStateException e) {
+            Log.w("MainActivity", e.getMessage(), e);
         }
 
         return true;

@@ -14,26 +14,6 @@
             android:id="@+id/recommendations"
             android:icon="@android:drawable/ic_media_play"
             android:title="Recommendations" />
-        <item
-            android:id="@+id/entities"
-            android:icon="@android:drawable/ic_media_play"
-            android:title="Platform Entities" />
-
-        <item
-            android:icon="@android:drawable/ic_media_play"
-            android:title="User interests">
-            <menu>
-                <item
-                    android:id="@+id/interests_categories"
-                    android:icon="@android:drawable/ic_media_play"
-                    android:title="User categories" />
-                <item
-                    android:id="@+id/interests_document"
-                    android:icon="@android:drawable/ic_media_play"
-                    android:title="User documents" />
-
-            </menu>
-        </item>
 
 </group>
 
